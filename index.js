@@ -1,15 +1,21 @@
 const express = require("express");
 const mongoose = require("mongoose")
+const dotenv = require("dotenv")
 
 const jobRoutes = require("./routes/job");
 
 const app = express()
 
+dotenv.config();
+
 app.use(express.json());
+
+console.log(process.env.DB_CONNECTION_URL);
+
 
 // mongoose.connect("mongodb://localhost:27017/jobapp")
 // mongoose.connect("mongodb://127.0.0.1:27017/jobapp")
-mongoose.connect("mongodb+srv://akodre111:ZAWGU09em5G74P0q@jobapp.4axhi.mongodb.net/")
+mongoose.connect(process.env.DB_CONNECTION_URL)
     .then(() => {
         console.log("connect db");
     })
